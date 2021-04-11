@@ -2,7 +2,7 @@
 function Get-TeedyDocument {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline)]
         [TeedyService]$TeedyService,
 
         [Parameter(Mandatory = $true)]
