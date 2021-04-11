@@ -1,4 +1,6 @@
 . ./class_TeedyService.ps1
+. ./Save-Download.ps1
+
 function Get-TeedyZippedFiles {
     [CmdletBinding()]
     param (
@@ -7,12 +9,13 @@ function Get-TeedyZippedFiles {
 
         [Parameter(Mandatory = $true)]
         [string]
-        $ID
-    )
-    
-    $body = @{
-        id = $ID
-    }
+        $ID,
 
-    $res = Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/file/zip") -Method Get -Headers $TeedyService.Headers -Body $body -Outfile "blah.zip" -ContentType 'application/x-www-form-urlencoded'
+        [Parameter(Mandatory = $false)]
+        [string]
+        $Directory = "."
+    )
+
+    $res = $TeedyService.GetZippedFile($ID)
+    $res | Save-Download -Directory $Directory
 }

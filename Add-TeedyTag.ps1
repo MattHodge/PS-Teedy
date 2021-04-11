@@ -25,11 +25,5 @@ function Add-TeedyTag {
         $Parent
     )
 
-    $body = @{
-        name = $Name
-        color = $Color
-        # parent = $Parent
-    }
-    
-    Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/tag") -Method Put -Headers $TeedyService.Headers -Body $body -ContentType 'application/x-www-form-urlencoded'
+    return $TeedyService.AddTag($Name, $Color, $Parent)
 }

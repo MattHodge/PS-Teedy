@@ -6,6 +6,6 @@ function Get-TeedyTags {
         [TeedyService]$TeedyService
     )
     
-    $res = Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/tag/list") -Method Get -Headers $TeedyService.Headers -ContentType 'application/x-www-form-urlencoded'
+    $res = $TeedyService.GetTags()
     return $res.tags
 }
