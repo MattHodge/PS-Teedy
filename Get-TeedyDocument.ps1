@@ -1,14 +1,14 @@
-. ./class_TeedyCredential.ps1
+. ./class_TeedyService.ps1
 function Get-TeedyDocument {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [TeedyCredential]$TeedyCredential,
+        [TeedyService]$TeedyService,
 
         [Parameter(Mandatory = $true)]
         [string]
         $ID
     )
 
-    return $TeedyCredential.GetDocument($ID)
+    return $TeedyService.GetDocument($ID)
 }

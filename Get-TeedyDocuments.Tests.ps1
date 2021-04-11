@@ -1,7 +1,7 @@
 BeforeAll { 
     . $PSScriptRoot/Get-TeedyDocuments.ps1
 
-    $teedyCredential = [TeedyCredential]::new("http://fake", "faketoken")
+    $TeedyService = [TeedyService]::new("http://fake", "faketoken")
 }
 
 Describe "Test Get-TeedyDocuments" {
@@ -47,7 +47,7 @@ Describe "Test Get-TeedyDocuments" {
         
         Mock Invoke-RestMethod { return [System.Management.Automation.PSSerializer]::Deserialize($fakeResult) }
         
-        $res = Get-TeedyDocuments -TeedyCredential $teedyCredential
+        $res = Get-TeedyDocuments -TeedyService $TeedyService
         $res[0].id | Should -Be '557aeee4-aa21-4369-8c1c-9705c842c673'
         $res[1].id | Should -Be '55acb7ef-e918-4004-adbc-e8324fe45a1b'
     }

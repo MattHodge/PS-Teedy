@@ -1,9 +1,9 @@
-. ./class_TeedyCredential.ps1
+. ./class_TeedyService.ps1
 function Get-TeedyZippedFiles {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [TeedyCredential]$TeedyCredential,
+        [TeedyService]$TeedyService,
 
         [Parameter(Mandatory = $true)]
         [string]
@@ -14,5 +14,5 @@ function Get-TeedyZippedFiles {
         id = $ID
     }
 
-    $res = Invoke-RestMethod -Uri $TeedyCredential.GetFullAPIUrl("/api/file/zip") -Method Get -Headers $TeedyCredential.Headers -Body $body -Outfile "blah.zip" -ContentType 'application/x-www-form-urlencoded'
+    $res = Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/file/zip") -Method Get -Headers $TeedyService.Headers -Body $body -Outfile "blah.zip" -ContentType 'application/x-www-form-urlencoded'
 }

@@ -1,11 +1,11 @@
-. ./class_TeedyCredential.ps1
+. ./class_TeedyService.ps1
 function Get-TeedyTags {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [TeedyCredential]$TeedyCredential   
+        [TeedyService]$TeedyService   
     )
     
-    $res = Invoke-RestMethod -Uri $TeedyCredential.GetFullAPIUrl("/api/tag/list") -Method Get -Headers $TeedyCredential.Headers -ContentType 'application/x-www-form-urlencoded'
+    $res = Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/tag/list") -Method Get -Headers $TeedyService.Headers -ContentType 'application/x-www-form-urlencoded'
     return $res.tags
 }

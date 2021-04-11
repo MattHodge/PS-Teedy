@@ -1,9 +1,9 @@
-. ./class_TeedyCredential.ps1
+. ./class_TeedyService.ps1
 function Add-TeedyTag {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [TeedyCredential]$TeedyCredential,
+        [TeedyService]$TeedyService,
 
         [Parameter(Mandatory = $true)]
         [string]
@@ -31,5 +31,5 @@ function Add-TeedyTag {
         # parent = $Parent
     }
     
-    Invoke-RestMethod -Uri $TeedyCredential.GetFullAPIUrl("/api/tag") -Method Put -Headers $TeedyCredential.Headers -Body $body -ContentType 'application/x-www-form-urlencoded'
+    Invoke-RestMethod -Uri $TeedyService.GetFullAPIUrl("/api/tag") -Method Put -Headers $TeedyService.Headers -Body $body -ContentType 'application/x-www-form-urlencoded'
 }

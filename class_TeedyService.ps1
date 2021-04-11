@@ -1,4 +1,4 @@
-class TeedyCredential
+class TeedyService
 {
     [string]$URL
     [string] hidden $Token
@@ -6,7 +6,7 @@ class TeedyCredential
     [hashtable] hidden $Headers
 
     # Constructor
-    TeedyCredential(
+    TeedyService(
         [string]$u,
         [string]$t
     ){
