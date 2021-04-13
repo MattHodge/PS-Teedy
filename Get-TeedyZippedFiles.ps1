@@ -13,9 +13,9 @@ function Get-TeedyZippedFiles {
 
         [Parameter(Mandatory = $false)]
         [string]
-        $Directory = "."
+        $Directory = (Get-Location)
     )
 
     $res = $TeedyService.GetZippedFile($ID)
-    $res | Save-Download -Directory $Directory
+    $res | Save-Download -Directory $Directory -FileName $FileName
 }

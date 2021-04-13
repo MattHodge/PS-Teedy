@@ -8,6 +8,8 @@ function Save-Download {
         A WebResponseObject from running an Invoke-WebRequest on a file to download
     .PARAMETER Directory
         The directly to save the file to
+    .PARAMETER Directory
+        Override the filename of the download, but keep the extension of the download
     .EXAMPLE
         # Download Microsoft Edge
         $download = Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?linkid=2109047&Channel=Stable&language=en&consent=1"
@@ -21,7 +23,11 @@ function Save-Download {
 
         [Parameter(Mandatory = $false)]
         [string]
-        $Directory = "."
+        $Directory = (Get-Location),
+
+        [Parameter(Mandatory = $false)]
+        [string]
+        $FileName
     )
 
     $errorMessage = "Cannot determine filename for download."
