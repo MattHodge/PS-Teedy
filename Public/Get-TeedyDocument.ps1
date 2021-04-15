@@ -1,4 +1,3 @@
-. ./class_TeedyService.ps1
 function Get-TeedyDocument {
     [CmdletBinding()]
     param (

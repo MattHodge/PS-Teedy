@@ -1,11 +1,10 @@
-. ./class_TeedyService.ps1
-function Get-TeedyTags {
+function Get-TeedyDocuments {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline)]
         [TeedyService]$TeedyService
     )
-    
-    $res = $TeedyService.GetTags()
-    return $res.tags
+
+    $res = $TeedyService.GetDocuments()
+    return $res.documents
 }

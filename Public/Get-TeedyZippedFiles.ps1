@@ -1,6 +1,3 @@
-. ./class_TeedyService.ps1
-. ./Save-Download.ps1
-
 function Get-TeedyZippedFiles {
     [CmdletBinding()]
     param (

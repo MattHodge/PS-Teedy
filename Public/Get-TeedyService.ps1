@@ -1,5 +1,3 @@
-. ./class_TeedyService.ps1
-
 function Get-TeedyService {
     <#
     .SYNOPSIS
@@ -8,13 +6,11 @@ function Get-TeedyService {
         Returns a Teedy Authentication Token
     .PARAMETER URL
         URL of the Teedy server
-    .PARAMETER Username
+    .PARAMETER Credential
         Username for your Teedy account
-    .PARAMETER Password
-        Password for your Teedy account
     .EXAMPLE
-        $cred = Get-Credential -UserName admin
-        $token = Get-TeedyService -URL https://teedy.host.com -Username admin -Password $cred.GetNetworkCredential().SecurePassword
+        $creds = Get-Credential -UserName admin
+        $token = Get-TeedyService -URL https://teedy.host.com -Credential $creds
     #>
     [CmdletBinding()]
     param (
@@ -23,23 +19,19 @@ function Get-TeedyService {
         $URL,
 
         [Parameter(Mandatory = $true)]
-        [string]
-        $Username,
-
-        [Parameter(Mandatory = $true)]
-        [securestring]
-        $Password
+        [System.Management.Automation.PSCredential]
+        $Credential
     )
-    
+
     $fullURL = $URL.Trim("/") + "/api/user/login"
 
     $bodyData = @{
-        username = $Username
-        password = ConvertFrom-SecureString -SecureString $Password -AsPlainText
+        username = $Credential.UserName
+        password = $Credential.GetNetworkCredential().Password
     }
 
     $webrequest = Invoke-WebRequest -Uri $fullURL -Body $bodyData -Method Post -SessionVariable websession
-    $cookies = $websession.Cookies.GetCookies($fullURL) 
+    $cookies = $websession.Cookies.GetCookies($fullURL)
 
     return [TeedyService]::new($URL, $cookies.Value)
 }

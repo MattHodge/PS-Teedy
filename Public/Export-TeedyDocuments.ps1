@@ -1,7 +1,3 @@
-. ./class_TeedyService.ps1
-. ./Get-TeedyDocuments.ps1
-. ./Get-TeedyDocument.ps1
-. ./Get-TeedyZippedFiles.ps1
 function Export-TeedyDocuments {
     [CmdletBinding()]
     param (
@@ -16,7 +12,7 @@ function Export-TeedyDocuments {
     $ErrorActionPreference = 'Stop'
 
     $backedMetadataList = @()
-    
+
     $documents = Get-TeedyDocuments -TeedyService $TeedyService
     foreach ($doc in $documents) {
         $docId = $doc.id
@@ -37,7 +33,7 @@ function Export-TeedyDocuments {
 
         # Save the document JSON
         Get-TeedyDocument -TeedyService $TeedyService -ID $docId | ConvertTo-Json | Out-File -FilePath $jsonFilePath
-        
+
         if ($doc.file_count -gt 0) {
             # Download the attachments
             Get-TeedyZippedFiles -TeedyService $TeedyService -ID $docId -Directory $directoryToSaveFile -Verbose

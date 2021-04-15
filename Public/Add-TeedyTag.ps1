@@ -1,4 +1,3 @@
-. ./class_TeedyService.ps1
 function Add-TeedyTag {
     [CmdletBinding()]
     param (

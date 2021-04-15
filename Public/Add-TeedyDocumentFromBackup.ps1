@@ -1,6 +1,3 @@
-. ./class_TeedyService.ps1
-. ./Add-TeedyTag.ps1
-. ./Get-TeedyTags.ps1
 function Add-TeedyDocumentFromBackup {
     [CmdletBinding()]
     param (
@@ -24,7 +21,7 @@ function Add-TeedyDocumentFromBackup {
         })]
         $FilePath
     )
-    
+
     $doc = Get-Content -Path $FilePath | ConvertFrom-Json
 
     $existingTags = Get-TeedyTags -TeedyService $TeedyService
@@ -49,7 +46,7 @@ function Add-TeedyDocumentFromBackup {
             Add-TeedyTag -TeedyService $TeedyService -Name $tag.InputObject.name -Color $tag.InputObject.color
         }
     }
-    
+
     # tags when adding to teedy need to be a list of strings, not a list of objects
     $flatDocuemntTags = $documentTags | Select-Object -ExpandProperty name
 

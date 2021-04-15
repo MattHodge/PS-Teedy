@@ -54,7 +54,7 @@ class TeedyService
         # eg. &tags=dc38fd3d-ea33-45ca-9337-91d4f53c8c60&tags=54a310ff-97d0-47b9-ae6c-a824fb7ae8c9
         # Using a hashtable for the body of Invoke-WebRequest doesn't work for this.
         # Instead, you need to craft your own query string: https://stackoverflow.com/a/32443537
-        
+
         $queryParams = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
         $queryParams["title"] = $title
         $queryParams["description"] = $description
